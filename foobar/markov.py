@@ -36,9 +36,22 @@ def submatrix_by_range(matrix, sy, sx, ey, ex):
     return new_matrix
 
 
+def is_zero_matrix(matrix):
+    n = len(matrix)
+    for y in range(n):
+        for x in range(n):
+            if matrix[y][x] != 0:
+                return False
+    return True
+
+
 def determinant(matrix):
     if len(matrix) == 2:
         return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
+
+    # The determinant of a zero matrix is 1!
+    if is_zero_matrix(matrix):
+        return 1
 
     accumulator = 0
     first_row = matrix[0]
@@ -126,12 +139,32 @@ def find_t_and_s(matrix):
     return t, n - t
 
 
+def identity_minus_matrix(matrix):
+    n = len(matrix)
+    for y in range(n):
+        for x in range(n):
+            if x == y:
+                matrix[y][x] = 1 - matrix[y][x]
+            else:
+                matrix[y][x] = -matrix[y][x]
+
+    return matrix
+
+
 def solution(m):
 
     pass
 
 
 if __name__ == '__main__':
+    # mat = [
+    #     [0, 1, 0, 0, 0, 1],
+    #     [4, 0, 0, 3, 2, 0],
+    #     [0, 0, 0, 0, 0, 0],
+    #     [0, 0, 0, 0, 0, 0],
+    #     [0, 0, 0, 0, 0, 0],
+    #     [0, 0, 0, 0, 0, 0],
+    # ]
     # mat = [
     #     [0, 2, 1, 0, 0],
     #     [0, 0, 0, 3, 4],
@@ -140,12 +173,11 @@ if __name__ == '__main__':
     #     [0, 0, 0, 0, 0],
     # ]
     mat = [
-        [0, 1, 0, 0, 0, 1],
-        [4, 0, 0, 3, 2, 0],
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0],
+        [0, .5, 0, .5, 0],
+        [.5, 0, .5, 0, 0],
+        [0, .5, 0, 0, .5],
+        [0, 0, 0, 1, 0],
+        [0, 0, 0, 0, 1],
     ]
     # mat = [
     #     [0, 1, 2, 3, 4],
